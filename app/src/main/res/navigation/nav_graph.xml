@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/firstFragment">
+
+    <fragment
+        android:id="@+id/secondFragment"
+        android:name="com.ltu.m7019e.yelpapp.SearchFragment"
+        android:label="fragment_second"
+        tools:layout="@layout/fragment_search" >
+        <argument
+            android:name="userName"
+            app:argType="string" />
+        <argument
+            android:name="currentLocation"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_secondFragment_to_thirdFragment"
+            app:destination="@id/thirdFragment" />
+        <action
+            android:id="@+id/action_secondFragment_to_firstFragment3"
+            app:destination="@id/firstFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/thirdFragment"
+        android:name="com.ltu.m7019e.yelpapp.RestaurantListFragment"
+        android:label="fragment_third"
+        tools:layout="@layout/fragment_restaurant_list" >
+        <argument
+            android:name="searchTerm"
+            app:argType="string" />
+        <argument
+            android:name="location"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_thirdFragment_to_secondFragment"
+            app:destination="@id/secondFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/firstFragment"
+        android:name="com.ltu.m7019e.yelpapp.WelcomeFragment"
+        android:label="fragment_first"
+        tools:layout="@layout/fragment_welcome" >
+        <action
+            android:id="@+id/action_firstFragment_to_secondFragment"
+            app:destination="@id/secondFragment" />
+    </fragment>
+</navigation>

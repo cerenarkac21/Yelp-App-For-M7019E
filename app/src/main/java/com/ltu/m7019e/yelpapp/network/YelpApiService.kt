@@ -1,12 +1,17 @@
-package network
+package com.ltu.m7019e.yelpapp.network
 
+import com.ltu.m7019e.yelpapp.model.YelpSearchResult
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
-import utils.Constants.BASE_URL
+import retrofit2.http.GET
+import retrofit2.http.Query
+import com.ltu.m7019e.yelpapp.utils.Constants.BASE_URL
+import retrofit2.Call
+import retrofit2.http.Header
 import java.util.concurrent.TimeUnit
 
 /**
@@ -54,8 +59,14 @@ private val retrofit = Retrofit.Builder()
     .baseUrl(BASE_URL)
     .build()
 
-object YelpApi {
-    // initialization will be lazy
-    // create the built Retrofit object
-    val yelpRetrofitService: YelpApiService by lazy { retrofit.create(YelpApiService::class.java)}
+
+val yelpApiService: YelpApiService by lazy {
+    retrofit.create(YelpApiService::class.java)
+}
+public interface YelpApiService {
+    @GET("businesses/search")
+    fun searchRestaurants(
+        @Header("Authorization") authHeader: String,
+        @Query("term") searchTerm: String,
+        @Query("location") location: String) : Call<YelpSearchResult>
 }
